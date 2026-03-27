@@ -1,0 +1,24 @@
+# Environnement local
+.env
+.venv/
+__pycache__/
+*.pyc
+
+# Données (pas versionnées, le client fournit le CSV)
+data/
+
+# Scripts et notes perso (pas des livrables)
+generate_pptx.py
+Notes_Orales_Soutenance.md
+Guide_Presentation_Slides.md
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Presentation (livrée séparément)
+*.pptx
