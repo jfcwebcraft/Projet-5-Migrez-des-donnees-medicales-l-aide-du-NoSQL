@@ -1,0 +1,32 @@
+services:
+  mongo:
+    image: mongo:7
+    container_name: mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    env_file: .env
+    volumes:
+      - mongodb_data:/data/db
+      - ./initdb:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping')"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  loader:
+    build:
+      context: ./loader
+      dockerfile: Dockerfile
+    container_name: data_loader
+    depends_on:
+      mongo:
+        condition: service_healthy
+    env_file: .env
+    volumes:
+      - ./data:/data:ro
+    command: ["python", "loader.py"]
+
+volumes:
+  mongodb_data:
