@@ -113,5 +113,5 @@ def main():
         log(f"Nombre total de documents dans la collection : {count}")
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     main()
